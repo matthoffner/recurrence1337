@@ -33,7 +33,7 @@ if __name__ == '__main__':
 	p = Pool(2)
 	ScrapeQueue = []
 	i=1
-	for line in codecs.open("scrapelist.txt","r","utf-8"):
+	for line in codecs.open("sourcelist.txt","r","utf-8"):
 		ScrapeQueue.append(line.strip())
 	print ScrapeQueue
 	p.map(fork, ScrapeQueue)
