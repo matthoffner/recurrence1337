@@ -17,10 +17,8 @@ def fork(toDo):
 	sys.stdout = open('log.txt','w')
 	print call(["python", name + ".py"])
 	start = time.time()
-	print "Script started at:"
-	print start
 	cfile = re.compile("^.*csv$")
-	for fname in os.listdir("/home/matth/new-coder/scrape/%s"%(name)):
+	for fname in os.listdir(dir + "/" + "%s"%(name)):
 		if cfile.match(fname):
 			csvfile = fname
 	print "Completed %s"%(toDo)
