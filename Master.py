@@ -8,7 +8,8 @@ ScrapeQueue = Queue.Queue()
 
 def fork(toDo):
 	name = "%s"%(toDo).replace(".py","")
-	os.chdir("/home/matth/new-coder/scrape/")
+	dir = os.getcwd()
+	os.chdir(dir)
 	print "Acquired scrape: %s"%(toDo)
 	call(["mkdir", "-p", name])
 	call(["cp", toDo, "-t", name])
@@ -24,14 +25,14 @@ def fork(toDo):
 			csvfile = fname
 	print "Completed %s"%(toDo)
 	print "Filename written:"
-	print name
+	print csvfile
 	print "Number of rows:"
 	print open('%s'%(csvfile), 'r').read().count("\n")
 	print "Completed in:"
 	print str(time.time() - start)
 
 if __name__ == '__main__':
-	p = Pool(2)
+	p = Pool(4)
 	ScrapeQueue = []
 	i=1
 	for line in codecs.open("sourcelist.txt","r","utf-8"):
