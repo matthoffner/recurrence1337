@@ -7,16 +7,17 @@ import time
 ScrapeQueue = Queue.Queue()
 
 def fork(toDo):
-	sys.stdout = open('log.txt', 'w')
-	start = time.time()
-	print start
+	name = "%s"%(toDo).replace(".py","")
 	os.chdir("/home/matth/new-coder/scrape/")
 	print "Acquired scrape: %s"%(toDo)
-	name = "%s"%(toDo).replace(".py","")
 	call(["mkdir", "-p", name])
 	call(["cp", toDo, "-t", name])
 	os.chdir("./%s"%name)
+	sys.stdout = open('log.txt','w')
 	print call(["python", name + ".py"])
+	start = time.time()
+	print "Script started at:"
+	print start
 	cfile = re.compile("^.*csv$")
 	for fname in os.listdir("/home/matth/new-coder/scrape/%s"%(name)):
 		if cfile.match(fname):
